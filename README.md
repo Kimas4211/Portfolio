@@ -28,3 +28,20 @@ In **Settings → Pages**, select **Deploy from a branch → main / (root)**. Th
 4. Implement the remaining hero classes, page systems and production project content.
 
 *All chapter items in this stage are placeholders. They are not claims of completed client projects.*
+
+
+## Stage 02 — Mage visual anchor and Blender blockout starter
+
+The **Mage / Rift Observer** visual direction was approved on 2026-11-03.
+
+- [Approved appearance & constraints](docs/characters/mage-visual-approved.md)
+- [Full visual design brief](docs/characters/mage.md)
+- [Blender blockout generator](tools/blender/build_mage_blockout.py)
+
+Run this from the repository root with Blender 4.x installed:
+
+```sh
+blender --background --python tools/blender/build_mage_blockout.py
+```
+
+The script is a **rough static silhouette starter**, not a final mesh, rig or animated game character. It aims to produce a Blender scene, GLB and three preview angles under `assets/`. It was syntax-checked, but **not executed in Blender in the creation environment**; its outputs and compatibility must be tested locally before being treated as completed assets.
