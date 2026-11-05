@@ -1,0 +1,12 @@
+/* Stage 02: mage-only billboard proof. Other roles remain untouched. */
+.hero-character.mage .hero-svg{opacity:0}
+.hero-character.mage .mage2d-stage{position:absolute;z-index:2;bottom:34px;left:50%;width:clamp(67px,7.6vw,110px);height:169px;transform:translate3d(calc(-50% + var(--sprite-x,0px)),var(--sprite-y,0px),0);transition:transform .38s cubic-bezier(.2,.75,.2,1);pointer-events:none}
+.mage2d-stage .mage2d-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;user-select:none;-webkit-user-drag:none}
+.mage2d-stage .mage2d-shadow{filter:brightness(0) drop-shadow(0 0 2px rgba(246,97,29,.4));opacity:1;transition:opacity .42s,filter .42s}
+.mage2d-stage .mage2d-color{opacity:0;filter:brightness(.55) saturate(.7);transition:opacity .42s,filter .42s}
+.hero-character.mage:hover .mage2d-color,.hero-character.mage:focus-visible .mage2d-color,.hero-character.mage.is-active .mage2d-color{opacity:1;filter:brightness(1.05) saturate(1.07) drop-shadow(0 0 8px rgba(87,185,243,.26))}
+.hero-character.mage:hover .mage2d-shadow,.hero-character.mage:focus-visible .mage2d-shadow,.hero-character.mage.is-active .mage2d-shadow{opacity:.14}
+.hero-character.mage .mage2d-stage::after{content:"";position:absolute;left:24%;top:7%;width:32%;height:22%;border-radius:50%;background:radial-gradient(circle,rgba(87,185,243,.48),transparent 68%);filter:blur(5px);opacity:0;transition:opacity .38s;pointer-events:none}
+.hero-character.mage:hover .mage2d-stage::after,.hero-character.mage:focus-visible .mage2d-stage::after,.hero-character.mage.is-active .mage2d-stage::after{opacity:1}
+@media(max-width:700px){.hero-character.mage .mage2d-stage{height:126px;width:62px;bottom:25px}}
+@media(prefers-reduced-motion:reduce){.hero-character.mage .mage2d-stage{transition:none}.mage2d-stage .mage2d-layer{transition:none}}
