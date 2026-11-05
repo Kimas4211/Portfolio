@@ -1,0 +1,11 @@
+/* Mage 01 / Stage 03: overrides only Mage illustration. */
+.hero-character.mage .mage2d-stage{width:clamp(77px,9.3vw,135px);height:169px;bottom:34px}
+.hero-character.mage .mage2d-shadow,.hero-character.mage .mage2d-color,.hero-character.mage .mage2d-cast{object-fit:contain;object-position:center bottom}
+.hero-character.mage .mage2d-shadow{filter:brightness(0)}
+.hero-character.mage .mage2d-color{filter:brightness(.72) saturate(.78);transition:opacity .42s ease,filter .42s ease}
+.hero-character.mage:is(:hover,:focus-visible,.is-active) .mage2d-color{filter:brightness(1) saturate(1.05) drop-shadow(0 0 5px rgba(87,185,243,.28))}
+.hero-character.mage .mage2d-cast{opacity:0;pointer-events:none;transition:opacity .14s ease-out;transform-origin:50% 92%}
+.hero-character.mage.is-casting .mage2d-cast{opacity:1}
+.hero-character.mage.is-casting .mage2d-color,.hero-character.mage.is-casting .mage2d-shadow{opacity:0}
+@media(max-width:700px){.hero-character.mage .mage2d-stage{width:74px;height:126px;bottom:25px}}
+@media(prefers-reduced-motion:reduce){.hero-character.mage .mage2d-cast{transition:none}}
