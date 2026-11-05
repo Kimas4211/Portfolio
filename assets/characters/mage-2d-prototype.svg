@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 420" role="img" aria-label="Mage 01 The Rift Observer 2D prototype">
+<defs>
+ <linearGradient id="robe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#405170"/><stop offset=".36" stop-color="#17263b"/><stop offset="1" stop-color="#090f1c"/></linearGradient>
+ <linearGradient id="mantle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72829b"/><stop offset=".24" stop-color="#35445f"/><stop offset="1" stop-color="#121b2b"/></linearGradient>
+ <linearGradient id="metal" x1="0" x2="1"><stop stop-color="#55432d"/><stop offset=".42" stop-color="#d6b985"/><stop offset="1" stop-color="#665038"/></linearGradient>
+ <linearGradient id="hair" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#e1e7eb"/><stop offset=".52" stop-color="#a7b6c6"/><stop offset="1" stop-color="#49576b"/></linearGradient>
+ <radialGradient id="gem"><stop stop-color="#e6faff"/><stop offset=".35" stop-color="#61c9ff"/><stop offset=".78" stop-color="#187cc5"/><stop offset="1" stop-color="#123755"/></radialGradient>
+ <filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<!-- a single illustration: the website duplicates it to create independent silhouette/color states -->
+<g id="boots"><path d="M119 361L110 394 88 399Q77 410 93 411H136L144 363Z" fill="#242630" stroke="#a18c6b" stroke-width="2"/><path d="M152 361L157 394 179 400Q189 412 169 412H135L132 367Z" fill="#1d222e" stroke="#a18c6b" stroke-width="2"/></g>
+<g id="robe-back"><path d="M97 131Q65 145 69 218L48 347 79 370 106 340 113 385 143 376 156 343 186 370 208 352 187 228Q188 152 161 130Z" fill="url(#robe)" stroke="#95795a" stroke-width="3"/><path d="M86 185L69 352 87 361 116 316 111 206Z" fill="#101720" opacity=".9"/><path d="M178 193L202 349 185 364 149 316 157 211Z" fill="#0d1521" opacity=".8"/></g>
+<g id="torso"><path d="M109 124L161 124 177 198 165 268 111 274 91 198Z" fill="#26364a" stroke="#997a58" stroke-width="3"/><path d="M112 126L138 157 159 128 157 211 139 255 107 214Z" fill="#121c2b"/><path d="M139 155L140 242" fill="none" stroke="#b69965" stroke-width="2" opacity=".65"/><path d="M104 227Q136 235 171 226" stroke="#d5b783" stroke-width="7" fill="none"/><path d="M133 225L143 225 147 239 137 248 128 238Z" fill="url(#metal)" stroke="#231d1b" stroke-width="2"/><path d="M122 253L111 351 139 380 152 353 146 251" fill="url(#robe)" stroke="#8d6f50" stroke-width="2"/></g>
+<g id="left-mantle"><path d="M105 120Q72 116 67 151L46 268Q35 313 20 356L83 374 99 312 105 229 115 159Z" fill="url(#mantle)" stroke="#b59c74" stroke-width="4"/><path d="M73 151Q65 227 47 311L35 350" fill="none" stroke="#a48c66" stroke-width="2"/><path d="M60 337Q75 344 79 350" fill="none" stroke="#a38e67" stroke-width="2"/></g>
+<g id="arms">
+ <path d="M165 138Q184 133 191 159L204 201 195 230 176 227 166 192Z" fill="#314056" stroke="#a78b64" stroke-width="3"/>
+ <path d="M193 213L202 249 207 265 197 276 183 265 176 229Z" fill="#202a3a" stroke="#a88e68" stroke-width="3"/>
+ <path d="M177 251Q188 244 199 252L202 269Q193 279 182 272Z" fill="url(#metal)"/>
+ <path d="M92 145L75 148 65 184 75 215 92 210 106 165Z" fill="#1d2a3a" stroke="#ae9268" stroke-width="3"/>
+ <path d="M75 204L69 250 75 267 88 266 93 247 91 207Z" fill="#253449" stroke="#b59a72" stroke-width="3"/>
+</g>
+<g id="head">
+ <path d="M118 119L115 143 140 154 158 137 151 111Z" fill="#9a8582"/>
+ <path d="M106 63Q91 86 100 109L107 121 121 134 148 130Q170 112 165 87L149 66Z" fill="#cbb7ac" stroke="#635759" stroke-width="2"/>
+ <path d="M106 101L120 99M145 101L155 99" stroke="#444b58" stroke-width="2"/>
+ <path d="M129 111L128 119 136 119" stroke="#796769" stroke-width="1.5" fill="none"/>
+ <path d="M110 64Q114 44 132 43 156 37 168 58 179 75 159 91L157 73 146 72 132 82 105 83 96 97Q86 74 110 64Z" fill="url(#hair)" stroke="#687589" stroke-width="2"/>
+ <path d="M99 79L83 101 106 91 92 114 116 96 111 77ZM146 48L161 37 162 61 176 58 163 80 147 73Z" fill="url(#hair)"/>
+ <path d="M113 67L102 53 130 58 147 45 137 67 118 82Z" fill="#d5dfe6" opacity=".95"/>
+</g>
+<g id="collar"><path d="M105 125L130 153 117 172 91 140Z" fill="url(#metal)" opacity=".95"/><path d="M157 122L138 153 147 171 169 137Z" fill="#a98a5f" stroke="#3a2b22" stroke-width="2"/><path d="M123 151L138 157 148 152 138 173Z" fill="url(#gem)" stroke="#bca477" stroke-width="2"/></g>
+<g id="staff">
+ <path d="M60 55L63 398" stroke="#131923" stroke-width="13" stroke-linecap="round"/><path d="M61 62L62 394" stroke="url(#metal)" stroke-width="5" stroke-linecap="round"/>
+ <path d="M61 66Q26 51 34 15Q42 -8 62 8 M62 8Q80 -9 92 15Q103 49 67 66" fill="none" stroke="url(#metal)" stroke-width="9" stroke-linecap="round"/>
+ <path d="M62 12L77 35 62 67 48 36Z" fill="url(#gem)" stroke="#d4c197" stroke-width="3"/>
+ <ellipse cx="62" cy="38" rx="30" ry="33" fill="#57b9f3" opacity=".14" filter="url(#glow)"/>
+ <path d="M68 257L54 256 49 270 64 283 74 272Z" fill="#3d3a36" stroke="#a78a61" stroke-width="2"/>
+</g>
+</svg>
