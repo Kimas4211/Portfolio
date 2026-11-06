@@ -1,20 +1,21 @@
-/* Stage 03: mage sprites are preloaded; clicking briefly reveals cast pose. */
+/* Stage 03: lightweight image preload and optional casting pose feedback. */
 (() => {
   const mage = document.querySelector('.hero-character.mage');
   if (!mage) return;
-  ['./assets/characters/mage/mage_idle.webp','./assets/characters/mage/mage_cast.webp'].forEach(src => {
-    const image = new Image();
-    image.src = src;
-  });
-  let timer;
+  const images = [
+    './assets/characters/mage/mage_idle.webp',
+    './assets/characters/mage/mage_cast.webp',
+  ];
+  images.forEach(src => { const image = new Image(); image.src = src; });
+  let castReset;
   mage.addEventListener('click', () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    clearTimeout(timer);
     mage.classList.remove('is-casting');
+    clearTimeout(castReset);
     mage.classList.add('is-casting');
-    timer = setTimeout(() => mage.classList.remove('is-casting'),900);
+    castReset = setTimeout(() => mage.classList.remove('is-casting'), 900);
   });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {clearTimeout(timer);mage.classList.remove('is-casting');}
+    if (e.key === 'Escape') { mage.classList.remove('is-casting'); clearTimeout(castReset); }
   });
 })();
