@@ -1,0 +1,10 @@
+/* Shared illustration treatment; the Mage keeps its existing artwork and motion. */
+.hero-character:not(.mage) .hero-svg{opacity:0}
+.party-sprite{position:absolute;z-index:2;bottom:34px;left:50%;width:clamp(90px,10vw,145px);height:174px;transform:translateX(-50%);pointer-events:none}
+.party-sprite img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;user-select:none}
+.party-silhouette{filter:brightness(0);transition:opacity .4s}
+.party-color{opacity:0;filter:brightness(.92);transition:opacity .4s,filter .4s}
+.hero-character:is(:hover,:focus-visible,.is-active) .party-color{opacity:1;filter:brightness(1.05) drop-shadow(0 0 5px rgba(var(--accent-rgb),.25))}
+.hero-character:is(:hover,:focus-visible,.is-active) .party-silhouette{opacity:0}
+@media(max-width:700px){.party-sprite{width:84px;height:130px;bottom:25px}}
+@media(prefers-reduced-motion:reduce){.party-sprite img{transition:none}}
