@@ -8,3 +8,8 @@
 .hero-character:is(:hover,:focus-visible,.is-active) .party-silhouette{opacity:0}
 @media(max-width:700px){.party-sprite{width:84px;height:130px;bottom:25px}}
 @media(prefers-reduced-motion:reduce){.party-sprite img{transition:none}}
+.party-sprite .party-attack{opacity:0;transition:opacity .12s ease-out;transform-origin:50% 95%}
+.hero-character.is-attacking .party-attack{opacity:1;animation:party-strike .7s ease-out both}
+.hero-character.is-attacking .party-color,.hero-character.is-attacking .party-silhouette{opacity:0}
+@keyframes party-strike{0%{transform:translateY(2px) scale(.97)}24%{transform:translateY(-3px) scale(1.04)}65%,100%{transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.party-sprite .party-attack{transition:none;animation:none}}
