@@ -1,0 +1,7 @@
+/* Mage spell: staff charge, travelling light, then a centered bloom. */
+.spell-layer.mage.casting{animation:none;opacity:1}
+.spell-layer.mage::before{content:"";position:absolute;left:var(--staff-x);top:var(--staff-y);width:28px;height:28px;margin:-14px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#c5f4ff 14%,#69caff 30%,transparent 70%);box-shadow:0 0 22px #6ccaff;opacity:0}
+.spell-layer.mage.casting::before{animation:mage-flight .92s linear both}
+.spell-layer.mage.casting .spell-center{width:140vmax;height:140vmax;background:radial-gradient(circle,rgba(225,249,255,.9),rgba(87,185,255,.65) 12%,rgba(29,115,240,.35) 38%,transparent 70%);animation:mage-bloom .92s cubic-bezier(.2,.7,.2,1) both}
+@keyframes mage-flight{0%{opacity:0;transform:translate(0,0) scale(.2)}12%{opacity:1;transform:translate(0,0) scale(1.2)}18%{transform:translate(0,0) scale(.8)}40%{opacity:1;transform:translate(var(--flight-x),var(--flight-y)) scale(1.3)}48%,100%{opacity:0;transform:translate(var(--flight-x),var(--flight-y)) scale(.3)}}
+@keyframes mage-bloom{0%,35%{opacity:0;transform:scale(.005)}42%{opacity:1;transform:scale(.025)}78%{opacity:.85;transform:scale(1)}100%{opacity:0;transform:scale(1.2)}}
