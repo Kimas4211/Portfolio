@@ -1,66 +1,808 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a0a0c"><title>BEYOND FORM. — Interactive David</title><meta name="description" content="One form. Five dimensions of creation. An experimental design portfolio.">
 <style>
-:root{color-scheme:dark;--ink:#09090b;--cream:#ede9e2;--line:rgba(237,233,226,.17);--faint:#888a8f;--accent:#dcb46b;font-family:Inter,'Segoe UI',Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--cream);overflow-x:hidden}button,a{color:inherit;font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #d7ae73;outline-offset:4px}a{text-decoration:none}.app{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#242427 0%,#111114 35%,#08080a 79%)}.stage{position:absolute;inset:0;touch-action:pan-y;cursor:grab}.stage canvas{display:block;width:100%;height:100%}.stage:active{cursor:grabbing}.grain{position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.32),transparent 36%,transparent 65%,rgba(0,0,0,.35)),linear-gradient(0deg,rgba(0,0,0,.78),transparent 26%,transparent 79%,rgba(0,0,0,.32))}.nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:31px clamp(23px,4.5vw,80px);border-bottom:1px solid rgba(255,255,255,.055)}.brand{font:500 18px Georgia,serif;letter-spacing:.14em}.nav-center,.nav-right,.eyebrow,.micro,.item-num,.status,.footer,.corner{font-size:10px;letter-spacing:.18em}.nav-center{color:#77767a}.nav-right{display:flex;gap:24px;align-items:center}.nav button,.back,.item-button,.menu-button{border:0;background:transparent}.nav button:hover,.back:hover{color:var(--accent)}.outline{border:1px solid var(--line)!important;padding:10px 16px!important}.intro{position:absolute;z-index:3;top:21%;left:clamp(25px,6vw,120px);width:min(28vw,420px);pointer-events:none;transition:opacity .6s,transform .8s}.eyebrow{font-weight:600;color:#c5a77c}.intro h1,.topic h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.048em;line-height:.98}.intro h1{font-size:clamp(44px,5.7vw,103px);margin:30px 0}.intro h1 i{font-weight:400;color:#aaa9a7}.intro p,.topic p{color:#a5a2a0;line-height:1.85;font-size:13px;max-width:310px}.spacer{height:1px;background:var(--line);width:86px;margin:30px 0}.hint{position:absolute;z-index:3;right:clamp(25px,5vw,90px);top:27%;max-width:215px;pointer-events:none;text-align:right;transition:opacity .55s}.hint p{font-size:12px;line-height:1.8;color:#a8a6a4}.label{color:#d8d5cc;font-size:11px;letter-spacing:.22em}.hover-tag{position:absolute;z-index:5;pointer-events:none;left:0;top:0;transform:translate(-50%,-135%);opacity:0;transition:opacity .2s;background:rgba(9,9,11,.87);border:1px solid rgba(235,222,208,.24);padding:11px 14px;white-space:nowrap;font-size:10px;letter-spacing:.16em;box-shadow:0 7px 25px #0009}.hover-tag.visible{opacity:1}.hover-tag .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--hover,#dcb46b);box-shadow:0 0 11px var(--hover,#dcb46b);margin-right:10px}.topic{position:absolute;z-index:5;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:110px clamp(25px,6vw,120px) 65px;gap:35px;opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}.app.is-focus .topic{opacity:1;transform:none;pointer-events:none}.topic-copy{width:27%;min-width:220px;pointer-events:auto}.topic h1{font-size:clamp(55px,7vw,116px);margin:22px 0 20px;color:var(--accent)}.topic .kicker{font-size:12px;letter-spacing:.24em;color:#f0ede5}.works{width:26%;min-width:245px;pointer-events:auto;align-self:center;background:linear-gradient(90deg,rgba(13,13,16,.78),rgba(12,12,14,.9));padding:24px 25px 8px;border-left:1px solid rgba(220,180,107,.32);backdrop-filter:blur(9px)}.works h2{font-size:10px;letter-spacing:.25em;font-weight:500;margin:3px 0 25px;color:#bbb1a3}.item-button{width:100%;text-align:left;display:grid;grid-template-columns:24px 1fr 15px;gap:12px;align-items:start;padding:18px 0;border-top:1px solid var(--line)}.item-button:hover{color:var(--accent)}.item-num{color:#9b938b}.item-main{font-family:Georgia,serif;font-size:17px;line-height:1.2}.item-desc{font-size:10px;color:#7b7b7b;letter-spacing:.08em;display:block;font-family:Inter,'Segoe UI',sans-serif;margin-top:8px;line-height:1.5}.back{font-size:10px;letter-spacing:.17em;padding:15px 0;margin-top:33px}.bottom{position:absolute;z-index:10;bottom:30px;left:clamp(25px,4.5vw,80px);right:clamp(25px,4.5vw,80px);display:flex;align-items:end;justify-content:space-between;gap:24px}.status{color:#aaa39d;max-width:65%;line-height:1.7}.footer{color:#777279;text-align:right}.credit{position:absolute;right:clamp(25px,4.5vw,80px);bottom:65px;z-index:10;color:#89848b;font-size:9px;letter-spacing:.07em;text-align:right;line-height:1.5}.credit a{text-decoration:underline;text-underline-offset:3px}.app.is-focus .intro,.app.is-focus .hint{opacity:0;transform:translateY(-20px)}.floating-list{position:absolute;z-index:9;left:50%;bottom:83px;transform:translateX(-50%);display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.floating-list button{background:#121214b0;border:1px solid #ffffff2d;padding:9px 12px;font-size:9px;letter-spacing:.15em;color:#b9b5b2}.floating-list button:hover{color:#fff;border-color:#b9a58b}.app.is-focus .floating-list{display:none}.loading{position:absolute;z-index:15;inset:0;display:grid;place-items:center;background:#09090bf0;text-align:center;padding:25px}.loading .loader-content{max-width:500px}.loading h2{font:400 35px Georgia,serif}.loading p{line-height:1.8;color:#aaa;font-size:13px}.progress{height:2px;width:240px;max-width:100%;background:#393939;margin:30px auto}.progress>span{display:block;height:100%;width:0%;background:#d4b483;transition:width .2s}.loading a{text-decoration:underline}.loading[hidden]{display:none}.detail-modal{position:fixed;z-index:30;inset:0;display:grid;place-items:center;padding:25px;background:#050506df}.detail-modal[hidden]{display:none}.detail-box{width:min(580px,100%);border:1px solid #ffffff30;background:#151517;padding:35px;box-shadow:0 22px 100px #000}.detail-box h2{font-family:Georgia,serif;font-weight:400;font-size:35px;margin:8px 0}.detail-box p{font-size:13px;color:#aaa;line-height:1.8}.detail-box button{padding:10px 0;border:none;background:none;color:var(--accent);cursor:pointer}.skip-link{position:absolute;top:-70px;left:20px;z-index:40;background:#fff;color:#111;padding:10px}.skip-link:focus{top:10px}
-@media(max-width:950px){.intro{top:18%;width:31vw}.intro h1{font-size:clamp(39px,6vw,68px)}.hint{top:auto;bottom:18%;right:28px}.topic{padding-left:35px;padding-right:35px}.topic h1{font-size:58px}.works{width:31%;min-width:215px}}@media(max-width:700px){.app{min-height:960px}.nav{padding:20px 18px}.nav-center{display:none}.nav-right{gap:13px}.brand{font-size:13px}.intro{top:110px;left:24px;width:75%}.intro h1{font-size:48px;margin:12px 0}.intro p{font-size:11px;max-width:230px}.spacer{margin:15px 0}.hint{top:220px;bottom:auto;right:20px;max-width:115px}.hint p{font-size:10px}.topic{position:relative;padding:95px 20px 150px;flex-direction:column;align-items:stretch;min-height:960px;justify-content:space-between}.topic-copy,.works{width:100%;min-width:0}.topic-copy{margin-top:20px}.topic h1{font-size:52px}.works{margin-top:auto}.bottom{left:18px;right:18px;bottom:20px}.floating-list{width:90%;bottom:88px}.credit{right:20px;bottom:58px}.footer{display:none}.status{max-width:100%;font-size:9px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+:root{color-scheme:dark;--ink:#09090b;--cream:#ede9e2;--line:rgba(237,233,226,.17);--faint:#888a8f;--accent:#dcb46b;font-family:Inter,'Segoe UI',Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--cream);overflow-x:hidden}button,a{color:inherit;font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #d7ae73;outline-offset:4px}a{text-decoration:none}.app{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#242427 0%,#111114 35%,#08080a 79%)}.stage{position:absolute;inset:0;touch-action:pan-y;cursor:default}.stage canvas{display:block;width:100%;height:100%}.grain{position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.32),transparent 36%,transparent 65%,rgba(0,0,0,.35)),linear-gradient(0deg,rgba(0,0,0,.78),transparent 26%,transparent 79%,rgba(0,0,0,.32))}.nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:31px clamp(23px,4.5vw,80px);border-bottom:1px solid rgba(255,255,255,.055)}.brand{font:500 18px Georgia,serif;letter-spacing:.14em}.nav-center,.nav-right,.eyebrow,.micro,.item-num,.status,.footer,.corner{font-size:10px;letter-spacing:.18em}.nav-center{color:#77767a}.nav-right{display:flex;gap:24px;align-items:center}.nav button,.back,.item-button,.menu-button{border:0;background:transparent}.nav button:hover,.back:hover{color:var(--accent)}.outline{border:1px solid var(--line)!important;padding:10px 16px!important}.intro{position:absolute;z-index:3;top:21%;left:clamp(25px,6vw,120px);width:min(28vw,420px);pointer-events:none;transition:opacity .6s,transform .8s}.eyebrow{font-weight:600;color:#c5a77c}.intro h1,.topic h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.048em;line-height:.98}.intro h1{font-size:clamp(44px,5.7vw,103px);margin:30px 0}.intro h1 i{font-weight:400;color:#aaa9a7}.intro p,.topic p{color:#a5a2a0;line-height:1.85;font-size:13px;max-width:310px}.spacer{height:1px;background:var(--line);width:86px;margin:30px 0}.label{color:#d8d5cc;font-size:11px;letter-spacing:.22em}.topic{position:absolute;z-index:5;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:110px clamp(25px,6vw,120px) 65px;gap:35px;opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}.app.is-focus .topic{opacity:1;transform:none;pointer-events:none}.topic-copy{width:27%;min-width:220px;pointer-events:auto}.topic h1{font-size:clamp(55px,7vw,116px);margin:22px 0 20px;color:var(--accent)}.topic .kicker{font-size:12px;letter-spacing:.24em;color:#f0ede5}.works{width:26%;min-width:245px;pointer-events:auto;align-self:center;background:linear-gradient(90deg,rgba(13,13,16,.78),rgba(12,12,14,.9));padding:24px 25px 8px;border-left:1px solid rgba(220,180,107,.32);backdrop-filter:blur(9px)}.works h2{font-size:10px;letter-spacing:.25em;font-weight:500;margin:3px 0 25px;color:#bbb1a3}.item-button{width:100%;text-align:left;display:grid;grid-template-columns:24px 1fr 15px;gap:12px;align-items:start;padding:18px 0;border-top:1px solid var(--line)}.item-button:hover{color:var(--accent)}.item-num{color:#9b938b}.item-main{font-family:Georgia,serif;font-size:17px;line-height:1.2}.item-desc{font-size:10px;color:#7b7b7b;letter-spacing:.08em;display:block;font-family:Inter,'Segoe UI',sans-serif;margin-top:8px;line-height:1.5}.back{font-size:10px;letter-spacing:.17em;padding:15px 0;margin-top:33px}.bottom{position:absolute;z-index:10;bottom:30px;left:clamp(25px,4.5vw,80px);right:clamp(25px,4.5vw,80px);display:flex;align-items:end;justify-content:space-between;gap:24px}.status{color:#aaa39d;max-width:65%;line-height:1.7}.footer{color:#777279;text-align:right}.credit{position:absolute;right:clamp(25px,4.5vw,80px);bottom:65px;z-index:10;color:#89848b;font-size:9px;letter-spacing:.07em;text-align:right;line-height:1.5}.credit a{text-decoration:underline;text-underline-offset:3px}.app.is-focus .intro{opacity:0;transform:translateY(-20px)}.loading{position:absolute;z-index:15;inset:0;display:grid;place-items:center;background:#09090bf0;text-align:center;padding:25px}.loading .loader-content{max-width:500px}.loading h2{font:400 35px Georgia,serif}.loading p{line-height:1.8;color:#aaa;font-size:13px}.progress{height:2px;width:240px;max-width:100%;background:#393939;margin:30px auto}.progress>span{display:block;height:100%;width:0%;background:#d4b483;transition:width .2s}.loading a{text-decoration:underline}.loading[hidden]{display:none}.detail-modal{position:fixed;z-index:30;inset:0;display:grid;place-items:center;padding:25px;background:#050506df}.detail-modal[hidden]{display:none}.detail-box{width:min(580px,100%);border:1px solid #ffffff30;background:#151517;padding:35px;box-shadow:0 22px 100px #000}.detail-box h2{font-family:Georgia,serif;font-weight:400;font-size:35px;margin:8px 0}.detail-box p{font-size:13px;color:#aaa;line-height:1.8}.detail-box button{padding:10px 0;border:none;background:none;color:var(--accent);cursor:pointer}.skip-link{position:absolute;top:-70px;left:20px;z-index:40;background:#fff;color:#111;padding:10px}.skip-link:focus{top:10px}
+@media(max-width:950px){.intro{top:18%;width:31vw}.intro h1{font-size:clamp(39px,6vw,68px)}.topic{padding-left:35px;padding-right:35px}.topic h1{font-size:58px}.works{width:31%;min-width:215px}}@media(max-width:700px){.app{min-height:960px}.nav{padding:20px 18px}.nav-center{display:none}.nav-right{gap:13px}.brand{font-size:13px}.intro{top:110px;left:24px;width:75%}.intro h1{font-size:48px;margin:12px 0}.intro p{font-size:11px;max-width:230px}.spacer{margin:15px 0}.topic{position:relative;padding:95px 20px 150px;flex-direction:column;align-items:stretch;min-height:960px;justify-content:space-between}.topic-copy,.works{width:100%;min-width:0}.topic-copy{margin-top:20px}.topic h1{font-size:52px}.works{margin-top:auto}.bottom{left:18px;right:18px;bottom:20px}.credit{right:20px;bottom:58px}.footer{display:none}.status{max-width:100%;font-size:9px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+
+.mind-media{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0}
+.mind-media-plane{position:absolute;top:0;left:0;transform-origin:0 0;
+ mask-image:linear-gradient(to right,transparent,#000 var(--side-feather,0%),#000 calc(100% - var(--side-feather,0%)),transparent),
+ linear-gradient(to bottom,transparent,#000 var(--top-feather,0%),#000 calc(100% - var(--base-feather,0%)),transparent);
+ mask-composite:intersect}
+.mind-media img,.mind-media video{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transform:none}
+.mind-media video{visibility:hidden}
+.mind-media.has-video-frame{opacity:1}
+.mind-media.has-video-frame video{visibility:visible}
+.mind-media[data-state="interactive"]{transition:none}
+.mind-media[data-state="interactive"].has-still{opacity:1}
+.mind-media[data-state="interactive"].has-still video{visibility:hidden}
+.topic{visibility:hidden}
+.app.is-focus .topic{visibility:visible}
+.app.is-awakening .intro{opacity:0;transform:translateY(-20px)}
+.app.is-mind-revelation>.nav,
+.app.is-mind-revelation>.credit,
+.app.is-mind-revelation>.bottom,
+.app.is-mind-revelation>.grain{visibility:hidden}
+.works{max-height:72vh}
+#projectList{max-height:calc(70vh - 68px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding-right:6px}
+#projectList .item-button{grid-template-columns:18px minmax(0,1fr) 12px;gap:9px}
+#projectList .item-main{font-size:clamp(14px,1.65vw,17px);overflow-wrap:break-word}
+#projectList h3{font-size:11px;letter-spacing:.17em;color:#c5a77c;margin:21px 0 10px}
+.app.is-catalog .topic h1{font-size:clamp(42px,5vw,84px)}
+.stage:focus{outline:none}
+.app:not(.is-focus){user-select:none}
+.footer{margin-left:auto}
+@media(max-width:700px){.works{max-height:48vh}#projectList{max-height:calc(47vh - 65px)}}
+
+.hotspot-debug,.hotspot-legend{position:absolute;pointer-events:none}
+.stage canvas.hotspot-debug{inset:0;opacity:.52}
+.stage canvas.hotspot-debug[hidden],.hotspot-legend[hidden]{display:none}
+.hotspot-legend{z-index:4;left:50%;top:105px;transform:translateX(-50%);
+ display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:90%;
+ padding:8px 12px;background:#0a0a0e;color:#fff;border:1px solid #444}
+.hotspot-legend span{font-size:10px;letter-spacing:.09em;display:flex;align-items:center;gap:5px}
+.hotspot-legend span::before{content:'';width:9px;height:9px;background:var(--zone-color)}
+@media(max-width:700px){.hotspot-legend{top:70px}}
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script></head><body>
 <a class="skip-link" href="#worksPanel">Skip sculpture → works</a>
-<div class="app" id="app"><div class="stage" id="stage" aria-label="可交互的大卫雕塑三维场景"></div><div class="grain" aria-hidden="true"></div>
-<header class="nav"><a class="brand" href="./">BEYOND FORM.</a><span class="nav-center">A STUDY IN POSSIBILITY / 2026</span><div class="nav-right"><button type="button" id="reset">RESET VIEW</button><button class="outline" type="button" id="allWorks">ALL WORKS ↗</button></div></header>
-<section class="intro"><div class="eyebrow">IN FORM, THE UNSEEN.</div><h1>BEYOND<br><i>FORM.</i></h1><div class="spacer"></div><p>What lies beneath the surface? Explore the form. Discover five dimensions of creation.</p></section>
-<section class="hint"><span class="label">THE UNREVEALED</span><p>Move to rotate.<br>Explore the marble.<br>Touch what calls to you.</p></section>
-<div class="hover-tag" id="hoverTag"><span class="dot"></span><span id="hoverName">MIND</span></div>
-<section class="topic" id="topic" aria-label="Selected portfolio discipline"><div class="topic-copy"><div class="eyebrow" id="topicLabel">01 / CREATIVE INTELLIGENCE</div><h1 id="topicName">MIND.</h1><div class="spacer"></div><div class="kicker" id="topicKicker">BEYOND THE KNOWN.</div><p id="topicDescription">AI exploration, experimentation and creative technology.</p><button class="back" id="back" type="button">← RETURN TO SCULPTURE</button></div><div class="works" id="worksPanel"><h2>SELECTED WORK / INDEX</h2><div id="projectList"></div></div></section>
-<div class="floating-list" id="focusNav"><button data-topic="mind">MIND</button><button data-topic="signal">SIGNAL</button><button data-topic="core">CORE</button><button data-topic="form">FORM</button><button data-topic="foundation">FOUNDATION</button></div>
-<div class="credit">3D scan: Scan the World · <a href="https://commons.wikimedia.org/wiki/File:David_(Michelangelo).stl" target="_blank" rel="noopener">Wikimedia Commons</a><br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> · model adapted in browser</div>
+<div class="app" id="app"><div class="stage" id="stage" tabindex="-1" aria-label="可交互的大卫雕塑三维场景"></div><div class="grain" aria-hidden="true"></div>
+<header class="nav"><a class="brand" href="./">KIMAS.</a><span class="nav-center">INTERACTIVE PORTFOLIO / 2026</span><div class="nav-right"><button class="outline" type="button" id="allWorks">ALL WORKS ↗</button></div></header>
+<section class="intro"><div class="eyebrow">VISUAL DESIGNER / CREATIVE TECHNOLOGIST</div><h1>BEYOND<br><i>FORM.</i></h1><div class="spacer"></div><p>What lies beneath the surface? Explore the form. Discover five dimensions of creation.</p><p lang="zh-CN">身在其间，意在形先</p></section>
+<section class="topic" id="topic" inert aria-label="Selected portfolio discipline"><div class="topic-copy"><div class="eyebrow" id="topicLabel">01 / AI &amp; CREATIVE EXPLORATION</div><h1 id="topicName">MIND.</h1><div class="spacer"></div><div class="kicker" id="topicKicker">BEYOND THE EXPECTED</div><p id="topicDescription">Exploring how AI and emerging technologies expand creative possibilities, from visual experimentation to interactive experiences.</p><button class="back" id="back" type="button">← RETURN TO SCULPTURE</button></div><div class="works" id="worksPanel"><h2>SELECTED EXPERIMENTS / 03</h2><div id="projectList"></div></div></section>
+<div class="credit">3D scan: Scan the World @ MyMiniFactory · <a href="https://commons.wikimedia.org/wiki/File:David_(Michelangelo).stl" target="_blank" rel="noopener">Wikimedia Commons</a><br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> · Blender adaptation: cropped, capped and decimated, with a separate weathered stone base</div>
 <div class="bottom"><div class="status" id="status">INITIALIZING THREE-DIMENSIONAL SCULPTURE…</div><div class="footer">DESIGN / TECHNOLOGY / INNOVATION / STRATEGY</div></div>
-<div class="loading" id="loading"><div class="loader-content"><div class="eyebrow">THE FORM / 3D ARTIFACT</div><h2 id="loadTitle">Revealing David.</h2><p id="loadText">Loading an authentic 3D scan. The first model can take longer to download.</p><div class="progress"><span id="progressBar"></span></div><div id="loadActions" hidden><p>模型尚未成功下载。请把 Wikimedia 的 STL 保存到网站目录的 <code>assets/models/david.stl</code>，然后刷新网页。也可从官方文件页获取资源。</p><p><a href="https://commons.wikimedia.org/wiki/File:David_(Michelangelo).stl" target="_blank" rel="noopener">OPEN ORIGINAL MODEL SOURCE ↗</a></p><label style="display:block;margin:20px auto;font-size:12px;color:#e9e6df">或直接选择已下载的 STL：<input type="file" id="modelFile" accept=".stl" style="display:block;margin:10px auto;max-width:100%"></label><button id="retry" class="outline">RETRY MODEL</button></div></div></div>
-<div class="detail-modal" id="detailModal" hidden><div class="detail-box"><div class="eyebrow">WORK IN PROGRESS</div><h2 id="detailTitle">Selected project</h2><p>此处为正式项目详情入口，等待真实案例内容接入。当前原型着重验证完整三维雕塑与作品导航，不展示虚构案例成果。</p><button id="closeDetail">← BACK TO INDEX</button></div></div>
+<div class="loading" id="loading"><div class="loader-content"><div class="eyebrow">THE FORM / 3D ARTIFACT</div><h2 id="loadTitle">Revealing David.</h2><p id="loadText">Loading the optimized David bust.</p><div class="progress"><span id="progressBar"></span></div><div id="loadActions" hidden><p>请通过本地 HTTP 服务打开本页，并确认 <code>assets/models/david-v2.glb</code> 可访问。</p><button id="retry" class="outline">RETRY MODEL</button></div></div></div>
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle" hidden><div class="detail-box"><div class="eyebrow">WORK IN PROGRESS</div><h2 id="detailTitle">Selected project</h2><p>此处为正式项目详情入口，等待真实案例内容接入。当前原型着重验证完整三维雕塑与作品导航，不展示虚构案例成果。</p><button id="closeDetail">← BACK TO INDEX</button></div></div>
 </div>
 <script type="module">
 import * as THREE from 'three';
-import {STLLoader} from 'three/addons/loaders/STLLoader.js';
-const $=q=>document.querySelector(q),app=$('#app'),stage=$('#stage'),loading=$('#loading'),status=$('#status'),hoverTag=$('#hoverTag');
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {createMindVideo} from './mind-video.js';
+import {createFormHover} from './form-hover.js';
+import {createSignalHover} from './signal-hover.js';
+import {createCoreHover} from './core-hover.js';
+import {createImpactHover} from './impact-hover.js';
+const $=q=>document.querySelector(q),app=$('#app'),stage=$('#stage'),loading=$('#loading');
+const stageLabel=stage.getAttribute('aria-label');
+const mediaLayer=document.createElement('div');
+mediaLayer.className='mind-media';
+mediaLayer.setAttribute('aria-hidden','true');
+mediaLayer.innerHTML='<div class="mind-media-plane"><img alt="" decoding="async"><video preload="auto" playsinline muted disablepictureinpicture></video></div>';
+
+const formMediaLayer=mediaLayer.cloneNode(true);
+const signalMediaLayer=mediaLayer.cloneNode(true);
+const coreMediaLayer=mediaLayer.cloneNode(true);
+const impactMediaLayer=mediaLayer.cloneNode(true);
 const topics={
- mind:{name:'MIND.',title:'CREATIVE INTELLIGENCE',tag:'BEYOND THE KNOWN.',description:'AI-assisted design, creative experiments and new ways of thinking.',color:'#d9ae66',projects:['AI LIGHTING STUDY','GENERATIVE DESIGN STUDIES','INTERACTIVE AI EXPERIMENTS']},
+ mind:{name:'MIND.',title:'AI & CREATIVE EXPLORATION',tag:'BEYOND THE EXPECTED',description:'Exploring how AI and emerging technologies expand creative possibilities, from visual experimentation to interactive experiences.',color:'#d9ae66',projects:['AI LIGHTING STUDY','GENERATIVE VISUAL STUDIES','INTERACTIVE AI EXPERIENCES']},
  signal:{name:'SIGNAL.',title:'DIGITAL EXPERIENCES',tag:'THOUGHT INTO CONNECTION.',description:'Web experiences, interfaces and digital products.',color:'#4b9cf4',projects:['WEB EXPERIENCE DESIGN','DIGITAL PRODUCT EXPLORATION','INTERACTION PROTOTYPES']},
  core:{name:'CORE.',title:'BRAND & VISUAL IDENTITY',tag:'IDEAS WITH A PULSE.',description:'Brand systems, visual storytelling and meaningful design expression.',color:'#d34652',projects:['VISUAL IDENTITY','BRAND CAMPAIGNS','EDITORIAL DESIGN']},
  form:{name:'FORM.',title:'SPATIAL & EXHIBITION',tag:'IDEAS TAKE SHAPE.',description:'Exhibition environments, spatial design and landscape concepts.',color:'#5aa987',projects:['EXHIBITION ENVIRONMENTS','EXPERIENTIAL SPACES','LANDSCAPE EXPLORATIONS']},
- foundation:{name:'FOUNDATION.',title:'STRATEGY & PRACTICE',tag:'STRUCTURE BEHIND POSSIBILITY.',description:'Cross-disciplinary problem solving, research and strategic thinking.',color:'#acadb0',projects:['CROSS-DISCIPLINARY PRACTICE','RESEARCH & SYSTEMS','PROJECT DELIVERY']}
+ impact:{name:'IMPACT.',title:'STRATEGY & PRACTICE',tag:'STRUCTURE BEHIND POSSIBILITY.',description:'Cross-disciplinary problem solving, research and strategic thinking.',color:'#d8dee4',projects:['CROSS-DISCIPLINARY PRACTICE','RESEARCH & SYSTEMS','PROJECT DELIVERY']}
 };
-const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.localClippingEnabled=true;stage.append(renderer.domElement);
-const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(32,1,.1,100);camera.position.set(0,.28,8.6);
-scene.add(new THREE.HemisphereLight(0xe9e9ed,0x28282d,2.0));const key=new THREE.DirectionalLight(0xffffff,3.1);key.position.set(-3,6,5);scene.add(key);const rim=new THREE.DirectionalLight(0xc3cadf,2.4);rim.position.set(4,2,-5);scene.add(rim);const fill=new THREE.DirectionalLight(0xd3cdc3,.9);fill.position.set(4,-1,5);scene.add(fill);
-const rig=new THREE.Group();scene.add(rig);let david=null,stone=null,clip=null,upperLow=0,modelHeight=1;const focusGroup=new THREE.Group();rig.add(focusGroup);const ornament=[];const ringMat=new THREE.MeshStandardMaterial({color:0xdcb46b,metalness:.76,roughness:.22,transparent:true,opacity:0,depthWrite:false});for(let i=0;i<3;i++){const r= new THREE.Mesh(new THREE.TorusGeometry(1.23+i*.22,.008+i*.004,8,160),ringMat.clone());r.rotation.set(.55+i*.4,.8+i*.6,.12+i*.8);r.position.set(0,.15,0);r.visible=false;focusGroup.add(r);ornament.push(r)}
-const plinth=new THREE.Group();rig.add(plinth);const baseMat=new THREE.MeshStandardMaterial({color:0xb8b7b2,roughness:.91,metalness:.02});for(let i=0;i<3;i++){const geom=new THREE.CylinderGeometry(1.09-i*.035,1.14-i*.03,.12,96);const ob=new THREE.Mesh(geom,baseMat);ob.position.y=-.85-i*.13;plinth.add(ob)}
-const flare=new THREE.Mesh(new THREE.SphereGeometry(.15,20,16),new THREE.MeshBasicMaterial({color:0xe0b26d,transparent:true,opacity:0,depthWrite:false}));rig.add(flare);let pointer={x:0,y:0,px:0,py:0},currentYaw=.16,targetYaw=.16,currentPitch=0,targetPitch=0,focus=false,transition=0,focusID='mind',hoverID=null,requested=false,hoverPoint=null,freezeAngle=0,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const ray=new THREE.Raycaster();const coords=new THREE.Vector2();let currentNormal=new THREE.Vector3();const ease=(a,b,t)=>a+(b-a)*Math.min(1,Math.max(0,t));
-function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();camera.position.z=w<700?11:8.6;camera.position.y=w<700?.05:.28}
-addEventListener('resize',resize);resize();
-function detectRegion(point,normal){if(!david)return null;const p=david.worldToLocal(point.clone());const b=david.geometry.boundingBox;const qY=p.y;const qX=p.x;const qZ=p.z;
- // Coordinates are in normalized torso local space; visible surface is always front-most raycast result.
- if(qY>1.09)return 'mind';
- if(qY>.57 && qY<=1.09){if(qX>.0 && qZ>.0)return 'signal';return 'core'}
- if(Math.abs(qX)>.45 && qY>-.46)return 'form';
- if(qY>-.77)return 'core';
- return 'foundation';}
-function hitTest(clientX,clientY){if(!david)return null;const box=renderer.domElement.getBoundingClientRect();coords.x=((clientX-box.left)/box.width)*2-1;coords.y=-((clientY-box.top)/box.height)*2+1;ray.setFromCamera(coords,camera);const meshes=[david,...plinth.children];const hits=ray.intersectObjects(meshes,false);if(!hits.length)return null;const h=hits[0];return {region:h.object===david?detectRegion(h.point,h.face?.normal):'foundation',point:h.point,normal:h.face?.normal}}
-function displayHover(id,x,y,hit){if(id!==hoverID){hoverID=id;hoverTag.classList.toggle('visible',!!id);hoverTag.style.setProperty('--hover',id?topics[id].color:'#dcb46b');$('#hoverName').textContent=id?topics[id].name.replace('.',''):'';stage.style.cursor=id?'pointer':'grab'}if(id){hoverTag.style.left=x+'px';hoverTag.style.top=y+'px'}hoverPoint=hit?.point||null}
-function focusTopic(id){if(!topics[id]||!david)return;focusID=id;focus=true;freezeAngle=currentYaw;targetYaw=.27;targetPitch=-.04;transition=0;app.classList.add('is-focus');displayHover(null);const t=topics[id];app.style.setProperty('--accent',t.color);$('#topicLabel').textContent=String(Object.keys(topics).indexOf(id)+1).padStart(2,'0')+' / '+t.title;$('#topicName').textContent=t.name;$('#topicKicker').textContent=t.tag;$('#topicDescription').textContent=t.description;$('#projectList').replaceChildren(...t.projects.map((name,i)=>{const b=document.createElement('button');b.className='item-button';b.innerHTML='<span class="item-num">'+String(i+1).padStart(2,'0')+'</span><span class="item-main">'+name+'<span class="item-desc">CASE STUDY / COMING SOON</span></span><span>↗</span>';b.onclick=()=>{$('#detailTitle').textContent=name;$('#detailModal').hidden=false;$('#closeDetail').focus()};return b}));status.textContent='FOCUS MODE / CURSOR NAVIGATES WORKS · FREE ROTATION LOCKED';}
-function returnExplore(){focus=false;app.classList.remove('is-focus');targetYaw=freezeAngle;targetPitch=0;transition=0;status.textContent='EXPLORE MODE / MOVE TO ORBIT · HOVER TO REVEAL';}
-stage.addEventListener('pointermove',e=>{const b=stage.getBoundingClientRect();pointer.px=e.clientX-b.left;pointer.py=e.clientY-b.top;pointer.x=(e.clientX-b.left)/b.width*2-1;pointer.y=(e.clientY-b.top)/b.height*2-1;if(focus||reduced)return;if(david){const h=hitTest(e.clientX,e.clientY);displayHover(h?.region,pointer.px,pointer.py,h);if(!h?.region){targetYaw=-pointer.x*Math.PI*.96;targetPitch=-pointer.y*.15;}else{targetYaw=currentYaw;targetPitch=currentPitch;}}});stage.addEventListener('pointerleave',()=>{if(!focus)displayHover(null)});stage.addEventListener('click',e=>{if(focus||!david)return;const h=hitTest(e.clientX,e.clientY);if(h?.region)focusTopic(h.region)});
-$('#back').onclick=returnExplore;$('#reset').onclick=returnExplore;$('#allWorks').onclick=()=>focusTopic('mind');$('#closeDetail').onclick=()=>{$('#detailModal').hidden=true};$('#detailModal').addEventListener('click',e=>{if(e.target.id==='detailModal')$('#detailModal').hidden=true});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#detailModal').hidden)$('#detailModal').hidden=true;else if(focus)returnExplore()}if(e.key==='ArrowLeft'&&!focus)targetYaw+=.22;if(e.key==='ArrowRight'&&!focus)targetYaw-=.22});document.querySelectorAll('[data-topic]').forEach(b=>b.addEventListener('click',()=>focusTopic(b.dataset.topic)));
-const loader=new STLLoader();const localPath='./assets/models/david.stl';const remote='https://upload.wikimedia.org/wikipedia/commons/4/4d/David_%28Michelangelo%29.stl';
-async function fetchModel(url){return new Promise((resolve,reject)=>loader.load(url,resolve,e=>{if(e.total){const n=Math.min(95,e.loaded/e.total*100);$('#progressBar').style.width=n+'%';$('#loadText').textContent='Downloading authentic David scan · '+Math.round(n)+'%'}},reject))}
-async function load(sourceURL=null){loading.hidden=false;$('#loadActions').hidden=true;$('#loadTitle').textContent='Revealing David.';$('#progressBar').style.width='2%';let g;try{if(sourceURL){g=await fetchModel(sourceURL)}else{try{g=await fetchModel(localPath)}catch{g=await fetchModel(remote)}}}catch(e){$('#loadTitle').textContent='Model not available.';$('#loadText').textContent='真实的《大卫》STL 尚未加载成功。此网站不会用假雕塑替代。';$('#loadActions').hidden=false;status.textContent='MODEL UNAVAILABLE / DOWNLOAD THE REAL SCAN';return}try{g.computeVertexNormals();g.computeBoundingBox();const b=g.boundingBox;const sizes=new THREE.Vector3();b.getSize(sizes);const longest=Math.max(sizes.x,sizes.y,sizes.z);modelHeight=longest;const center=b.getCenter(new THREE.Vector3());g.translate(-center.x,-center.y,-center.z);if(sizes.z>sizes.y&&sizes.z>sizes.x){g.rotateX(-Math.PI/2)}else if(sizes.x>sizes.y&&sizes.x>sizes.z){g.rotateZ(Math.PI/2)}
- g.computeBoundingBox();const bb=g.boundingBox;const height=bb.max.y-bb.min.y;const scale=3.8/height;g.scale(scale,scale,scale);g.computeBoundingBox();const bound=g.boundingBox;const c=bound.getCenter(new THREE.Vector3());g.translate(-c.x,-c.y,-c.z);g.computeBoundingBox();const last=g.boundingBox;upperLow=last.max.y-(last.max.y-last.min.y)*.37;
- // Use world-space clipping to show true scanned upper bust, not a fabricated mesh. Original lower portion remains in geometry.
- clip=new THREE.Plane(new THREE.Vector3(0,1,0),-upperLow);stone=new THREE.MeshStandardMaterial({color:0xc8c9c8,roughness:.91,metalness:0,clippingPlanes:[clip],side:THREE.DoubleSide});david=new THREE.Mesh(g,stone);rig.add(david);
- // Keep full scan temporarily clipped for the web experience; a closed Blender bust is the production deliverable.
- plinth.position.y=upperLow-.03;for(const o of plinth.children)o.position.y-=(-.85);flare.position.set(0,1.1,0);$('#progressBar').style.width='100%';loading.hidden=true;status.textContent='EXPLORE MODE / MOVE TO ORBIT · HOVER TO REVEAL';}catch(e){$('#loadTitle').textContent='Model conversion needed.';$('#loadText').textContent=String(e.message||e);$('#loadActions').hidden=false;status.textContent='MODEL PARSE ERROR';}}
-$('#retry').onclick=()=>load();$('#modelFile').addEventListener('change',e=>{const file=e.target.files?.[0];if(file){const url=URL.createObjectURL(file);load(url).finally(()=>URL.revokeObjectURL(url));}});load();
-const clock=new THREE.Clock();const cameraAim=new THREE.Vector3(0,.15,0);function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05);const lerp=1-Math.exp(-dt*(focus?2.4:3.3));currentYaw=ease(currentYaw,targetYaw,lerp);currentPitch=ease(currentPitch,targetPitch,lerp);rig.rotation.y=currentYaw;rig.rotation.x=currentPitch;if(focus){transition=Math.min(1,transition+dt/(reduced?.05:1.45))}else{transition=Math.max(0,transition-dt/(reduced?.05:1.1))}ornament.forEach((r,i)=>{r.visible=transition>.005;r.material.opacity=transition*(.6-i*.14);r.scale.setScalar(1+.17*transition);r.rotation.z+=dt*(i%2?-.13:.1)});const activeColor=new THREE.Color(topics[focusID].color);ornament.forEach(r=>r.material.color.copy(activeColor));if(stone){stone.emissive=stone.emissive||new THREE.Color(0);stone.emissive.copy(activeColor).multiplyScalar(transition*.08);stone.emissiveIntensity=.28;}
- if(david&&hoverID&&!focus&&hoverPoint){const pt=david.worldToLocal(hoverPoint.clone());flare.position.copy(pt);flare.position.multiplyScalar(1.025);flare.material.color.set(topics[hoverID].color);flare.material.opacity=ease(flare.material.opacity,.28,Math.min(1,dt*8));}else{flare.material.opacity=ease(flare.material.opacity,0,Math.min(1,dt*8))}
- renderer.render(scene,camera)}animate();
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;stage.append(renderer.domElement,mediaLayer,formMediaLayer,signalMediaLayer,coreMediaLayer,impactMediaLayer);
+const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(32,1,.1,100);camera.position.set(0,.3,6.35);
+const sky=new THREE.HemisphereLight(0xffffff,0x747474,.35);
+scene.add(sky);
+const key=new THREE.DirectionalLight(0xffffff,2.45);
+key.position.set(-3.5,5,4);
+scene.add(key);
+const rim=new THREE.DirectionalLight(0xffffff,1.36);
+rim.position.set(3,3,-4);
+scene.add(rim);
+const fill=new THREE.DirectionalLight(0xffffff,.26);
+fill.position.set(4,.4,5);
+scene.add(fill);
+const rig=new THREE.Group();
+scene.add(rig);
+function createEffects(mesh){
+ const v=(x,y,z)=>new THREE.Vector3(x,y,z);
+ const group=new THREE.Group();
+ mesh.add(group);
+ const neutral=mesh.material;
+ const shell=mesh.geometry;
+ const probe=new THREE.Mesh(shell,neutral);
+ const ray=new THREE.Raycaster();
+ const forward=v(0,0,-1);
+ function surface(x,y,lift=.008){
+  ray.set(v(x,y,2),forward);
+  const [hit]=ray.intersectObject(probe);
+  return hit?.point.addScaledVector(hit.face.normal,lift);
+ }
+ function surfacePath(points,lift){
+  const curve=new THREE.CatmullRomCurve3(points.map(([x,y])=>v(x,y,0)));
+  return curve.getPoints(24).map(p=>surface(p.x,p.y,lift)).filter(Boolean);
+ }
+ // Anchors follow the recesses in the original scan, in local model units.
+ // Each anchor stores its position and the half-width of the opening.
+ const mindSeep={value:0};
+ const mindFissures=[
+  {strength:1, anchors:[
+   [-.3755,1.9591,.0949,0],[-.3784,1.8989,.2023,.010],
+   [-.3428,1.8469,.2506,.019],[-.3183,1.7854,.2864,.025],
+   [-.2868,1.7401,.2792,.020],[-.2496,1.7118,.2521,.013],
+   [-.2113,1.6530,.2164,0]
+  ]},
+  {strength:.79, anchors:[
+   [-.0724,1.8158,.2884,0],[-.0771,1.7795,.2306,.012],
+   [-.0845,1.7410,.2289,.019],[-.0706,1.7009,.2441,.010],
+   [-.0597,1.6683,.2183,0]
+  ]},
+  {strength:.44, anchors:[
+   [-.4774,1.5013,.0023,0],[-.5009,1.4698,-.0132,.011],
+   [-.4960,1.4342,-.0294,.009],[-.4622,1.3947,-.0558,0]
+  ]}
+ ];
+ const mindSegments=mindFissures.flatMap(({strength,anchors})=>
+  anchors.slice(1).map((end,i)=>{
+   const anchor=values=>'vec4('+values.map(value=>value.toFixed(4)).join(',')+')';
+   return 'mindLight=max(mindLight,mindFissure('+anchor(anchors[i])+','+
+    anchor(end)+','+strength.toFixed(2)+',mindAA));';
+  })
+ ).join('\n');
+ neutral.onBeforeCompile=shader=>{
+  shader.uniforms.uMindSeep=mindSeep;
+  shader.vertexShader=shader.vertexShader.replace('#include <common>',
+   '#include <common>\nvarying vec3 vMindStone;')
+   .replace('#include <begin_vertex>','#include <begin_vertex>\nvMindStone = position;');
+  shader.fragmentShader=shader.fragmentShader.replace('#include <common>',`
+   #include <common>
+   varying vec3 vMindStone;
+   uniform float uMindSeep;
+
+   vec3 mindFissure(vec4 a,vec4 b,float strength,float aa){
+    vec2 edge=b.xy-a.xy;
+    vec2 relative=vMindStone.xy-a.xy;
+    float t=clamp(dot(relative,edge)/dot(edge,edge),0.,1.);
+    vec4 center=mix(a,b,t);
+    vec3 offset=vMindStone-center.xyz;
+    float distanceToCut=length(offset.xy);
+    float width=center.w;
+    float side=dot(offset.xy,normalize(vec2(-edge.y,edge.x)));
+    float recess=1.-smoothstep(.012,.050,abs(offset.z));
+    float crown=1.-smoothstep(.001,.025,offset.z);
+    float taper=smoothstep(0.,.010,width);
+    float opening=(1.-smoothstep(width-aa,width+aa,distanceToCut))*recess*taper;
+
+    // An off-center hot interior leaves a cooler stone lip along the opening.
+    float coreDistance=length(vec2(distanceToCut*.77,side-width*.19));
+    float core=(1.-smoothstep(width*.15,width*.68+aa,coreDistance))*opening*crown;
+    float radius=.025+width*1.6;
+    vec2 spill=vec2(distanceToCut/radius,offset.z/.067);
+    float wash=exp(-2.1*dot(spill,spill))*taper;
+    float nearGlow=(1.-smoothstep(width*.30,width*1.5+aa,distanceToCut))*recess*taper;
+    return vec3(opening,core*strength,(wash*.65+nearGlow*.35)*strength);
+   }`)
+   .replace('#include <color_fragment>',`
+    #include <color_fragment>
+    vec3 mindLight=vec3(0.);
+    float mindAA=max(.001,length(fwidth(vMindStone.xy))*.4);
+    if(uMindSeep>0. && vMindStone.x>-.64 && vMindStone.x<0. &&
+       vMindStone.y>1.35 && vMindStone.y<2.02 && vMindStone.z>-.14){
+     ${mindSegments}
+     diffuseColor.rgb*=1.-.69*mindLight.x*uMindSeep;
+    }`)
+   .replace('#include <emissivemap_fragment>',`
+    #include <emissivemap_fragment>
+    vec3 mindCore=vec3(6.0,4.15,2.24)*mindLight.y;
+    vec3 mindSpill=vec3(1.09,.64,.28)*mindLight.z;
+    totalEmissiveRadiance+=(mindCore+mindSpill)*uMindSeep;
+   `);
+ };
+ neutral.customProgramCacheKey=()=> 'mind-fissures-v3';
+
+ function lines(color,paths,onSurface=true){
+  const mat=new THREE.LineBasicMaterial({color,transparent:true,opacity:0,depthWrite:false});
+  const list=paths.map(points=>{
+   const pts=onSurface?surfacePath(points,.012):points;
+   const object=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),mat);
+   group.add(object);
+   return object;
+  });
+  return {mat,list};
+ }
+ const signalHover=createSignalHover(mesh);
+ const coreHover=createCoreHover(mesh);
+ const impactHover=createImpactHover(mesh);
+ const formHover=createFormHover(mesh);
+ function reveal(effect,level,count=1){
+  effect.mat.opacity=level;
+  effect.list.forEach(line=>{
+   line.visible=level>.012;
+   line.geometry.setDrawRange(0,Math.ceil(count*line.geometry.attributes.position.count));
+  });
+ }
+ return function update(level,awaken,time,dt=0,reduced=false){
+  const preview=THREE.MathUtils.smootherstep(level.mind,0,.56);
+  mindSeep.value=preview;
+  signalHover(level.signal,time,reduced);
+  formHover(level.form,awaken.form,dt,reduced);
+  coreHover(level.core,time,dt,reduced);
+  impactHover(level.impact,time,dt,reduced);
+ };
+}
+
+const topic=$('#topic'), allWorks=$('#allWorks'), back=$('#back');
+const topicName=$('#topicName'), projectList=$('#projectList');
+const detail=$('#detailModal'), detailClose=$('#closeDetail');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const ray=new THREE.Raycaster();
+const coords=new THREE.Vector2();
+const aim=new THREE.Vector3();
+const cameraFrom=new THREE.Vector3();
+const lookFrom=new THREE.Vector3();
+const cameraTo=new THREE.Vector3();
+const lookTo=new THREE.Vector3();
+const levels=Object.fromEntries(Object.keys(topics).map(id=>[id,0]));
+const awaken=Object.fromEntries(Object.keys(topics).map(id=>[id,0]));
+const hint=$('#status');
+let bust,base,updateEffects;
+let state='home',active=null,hovered=null,pendingHover=null,hoverAfter=0;
+let animation=0,duration=1,transitionTime=1,startedAt=0;
+let focusOrigin=null,detailOrigin=null;
+let pressed=null;
+
+// Outline anchors traced in the 825 × 763 home view, with depths in model world space.
+// The same projected polygons feed both input and the optional debug overlay.
+const authoredZones={
+ mind:[[125,45,0],[646,45,0],[646,267,0],[442,267,.17],[428,289,.15],
+       [405,304,.10],[375,298,.12],[350,295,.08],[329,309,-.03],[125,310,0]],
+ signal:[[120,246,0],[685,246,0],[690,425,0],[549,427,.18],[489,418,.11],
+         [438,408,.12],[392,399,.10],[348,400,.08],[304,405,.04],[258,413,-.03],[129,439,0]],
+ form:[[135,434,0],[188,417,0],[220,401,-.06],[248,386,-.08],[265,379,-.075],
+       [272,379,-.06],[271,411,.01],[272,439,.04],[276,465,.07],[276,492,.073],
+       [275,525,.055],[274,550,.03],[271,578,.025],[268,595,.01],[135,615,0]],
+ impact:[[482,337,.37],[501,339,.46],[517,349,.49],[531,365,.49],[545,386,.51],
+         [556,407,.52],[572,438,.53],[590,463,.45],[611,484,.34],[627,506,.26],
+         [632,529,.21],[631,544,.18],[622,556,.15],[609,564,.15],[593,564,.17],
+         [578,559,.21],[564,550,.24],[552,535,.28],[543,521,.34],[530,508,.39],
+         [517,491,.43],[504,477,.48],[490,461,.51],[478,443,.52],[469,422,.51],
+         [463,405,.51],[455,391,.49],[455,375,.45],[460,360,.42],[468,348,.39]]
+};
+const debugColors={mind:'#ff994d',signal:'#ffe34a',core:'#f05264',form:'#4ddb96',impact:'#42b6ff'};
+const impactEdge=3;
+const referenceCamera=new THREE.PerspectiveCamera(32,825/763,.1,100);
+referenceCamera.position.set(0,.30,6.35);
+referenceCamera.lookAt(0,.08,0);
+referenceCamera.updateMatrixWorld();
+const zoneAnchors=Object.fromEntries(Object.entries(authoredZones).map(([id,points])=>[id,
+ points.map(([x,y,z])=>{
+  const direction=new THREE.Vector3(x/825*2-1,1-y/763*2,.5).unproject(referenceCamera).sub(referenceCamera.position);
+  return referenceCamera.position.clone().addScaledVector(direction,(z-referenceCamera.position.z)/direction.z);
+ })
+]));
+let projectedZones={};
+let mapNeedsPaint=true;
+const debugHotspots=new URLSearchParams(location.search).get('hotspots')==='1';
+const debugCanvas=debugHotspots?document.createElement('canvas'):null;
+const debugLegend=debugHotspots?document.createElement('output'):null;
+const maskScene=debugHotspots?new THREE.Scene():null;
+let maskBust;
+if(debugHotspots){
+ debugCanvas.className='hotspot-debug';
+ debugCanvas.setAttribute('aria-hidden','true');
+ debugLegend.className='hotspot-legend';
+ debugLegend.setAttribute('aria-label','五色热区调试');
+ for(const [id,color] of Object.entries(debugColors)){
+  const label=document.createElement('span');
+  label.textContent=id.toUpperCase();
+  label.style.setProperty('--zone-color',color);
+  debugLegend.append(label);
+ }
+ stage.append(debugCanvas,debugLegend);
+}
+function projectHotspots(w,h){
+ camera.updateMatrixWorld();
+ projectedZones=Object.fromEntries(Object.entries(zoneAnchors).map(([id,points])=>[id,
+  points.map(anchor=>{
+   const {x,y}=anchor.clone().project(camera);
+   return [(x+1)*w/2,(1-y)*h/2];
+  })
+ ]));
+ mapNeedsPaint=true;
+}
+function insidePolygon(x,y,points){
+ let inside=false;
+ for(let i=0,j=points.length-1;i<points.length;j=i++){
+  const [a,b]=points[i],[c,d]=points[j];
+  if((b>y)!==(d>y)&&x<(c-a)*(y-b)/(d-b)+a)inside=!inside;
+ }
+ return inside;
+}
+function nearPolygon(x,y,points,padding){
+ return points.some(([ax,ay],i)=>{
+  const [bx,by]=points[(i+1)%points.length];
+  const dx=bx-ax,dy=by-ay;
+  const t=THREE.MathUtils.clamp(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy),0,1);
+  return Math.hypot(x-ax-t*dx,y-ay-t*dy)<=padding;
+ });
+}
+function paintHotspots(){
+ if(!debugCanvas)return;
+ debugCanvas.hidden=debugLegend.hidden=state!=='home'||!bust;
+ if(debugCanvas.hidden||!mapNeedsPaint)return;
+ mapNeedsPaint=false;
+ const w=stage.clientWidth,h=stage.clientHeight,pixelRatio=renderer.getPixelRatio();
+ debugCanvas.width=Math.round(w*pixelRatio);
+ debugCanvas.height=Math.round(h*pixelRatio);
+ const ctx=debugCanvas.getContext('2d');
+ ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);
+ const fill=(id)=>{
+  const points=projectedZones[id];
+  ctx.beginPath();
+  points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+  ctx.closePath();
+  ctx.fillStyle=debugColors[id];
+  ctx.fill();
+ };
+ ctx.fillStyle=debugColors.core;
+ ctx.fillRect(0,0,w,h);
+ fill('signal');
+ fill('mind');
+ fill('form');
+ if(!maskBust){
+  maskBust=new THREE.Mesh(bust.geometry,new THREE.MeshBasicMaterial());
+  maskBust.matrixAutoUpdate=false;
+  maskScene.add(maskBust);
+ }
+ bust.updateWorldMatrix(true,false);
+ maskBust.matrix.copy(bust.matrixWorld);
+ maskBust.matrixWorldNeedsUpdate=true;
+ renderer.render(maskScene,camera);
+ ctx.globalCompositeOperation='destination-in';
+ ctx.drawImage(renderer.domElement,0,0,w,h);
+ ctx.globalCompositeOperation='source-over';
+ fill('impact'); // This overlay intentionally bridges holes between the fingers.
+ ctx.strokeStyle=debugColors.impact;
+ ctx.lineWidth=2*impactEdge;
+ ctx.lineJoin='round';
+ ctx.stroke();
+}
+
+function pose(id,position,target){
+ const aspect=camera.aspect;
+ const shift=aspect>1.18?-.78:0;
+ const depth=Math.max(aspect<.92?8.05:6.35,3.35/aspect);
+ if(id&&id!=='all'){
+  const offset={signal:-.24,core:-.06,form:-.52,impact:.26}[id];
+  position.set(offset*.5,.15,depth*.92);
+  target.set(offset*.46,.16,0);
+ }else{
+  position.set(shift,aspect<.92?.12:.30,depth);
+  target.set(shift,.08,0);
+ }
+}
+function resize(){
+ const w=stage.clientWidth,h=stage.clientHeight;
+ renderer.setSize(w,h,false);
+ camera.aspect=w/h;
+ camera.updateProjectionMatrix();
+ if(state==='home'||active==='mind'){
+  pose(null,camera.position,aim);
+  camera.lookAt(aim);
+  projectHotspots(w,h);
+ }else pose(state==='returning'?null:active,cameraTo,lookTo);
+}
+addEventListener('resize',resize);
+resize();
+
+function pick(event){
+ if(!bust||state!=='home')return null;
+ const box=renderer.domElement.getBoundingClientRect();
+ const x=(event.clientX-box.left)*stage.clientWidth/box.width;
+ const y=(event.clientY-box.top)*stage.clientHeight/box.height;
+ // Treat the hand and forearm as a continuous visual envelope before testing depth.
+ const arm=projectedZones.impact;
+ const armPadding=impactEdge+(hovered==='impact'?5:0);
+ if(insidePolygon(x,y,arm)||nearPolygon(x,y,arm,armPadding))return 'impact';
+ coords.set((event.clientX-box.left)/box.width*2-1,1-(event.clientY-box.top)/box.height*2);
+ ray.setFromCamera(coords,camera);
+ const [hit]=ray.intersectObjects([bust,base],false);
+ if(!hit||hit.object===base)return null;
+ for(const id of ['form','mind','signal']){
+  if(insidePolygon(x,y,projectedZones[id]))return id;
+ }
+ return 'core';
+}
+function queueHover(id){
+ if(id===pendingHover)return;
+ pendingHover=id;
+ hoverAfter=performance.now()+(hovered==='impact'&&id!=='impact'?100:id?44:90);
+}
+stage.addEventListener('pointermove',event=>{
+ if(state==='home'&&event.pointerType==='mouse')queueHover(pick(event));
+});
+stage.addEventListener('pointerleave',()=>queueHover(null));
+stage.addEventListener('pointerdown',event=>{
+ if(event.button!==0||!event.isPrimary)return;
+ if(event.pointerType==='mouse')event.preventDefault();
+ pressed={id:pick(event),x:event.clientX,y:event.clientY};
+});
+stage.addEventListener('pointercancel',()=>{pressed=null});
+stage.addEventListener('click',event=>{
+ const origin=pressed;
+ pressed=null;
+ if(!origin||Math.hypot(event.clientX-origin.x,event.clientY-origin.y)>=8)return;
+ if(state==='focus'&&active==='mind'){returnHome();return;}
+ const id=pick(event);
+ if(id&&id===origin.id)enter(id,stage);
+});
+
+function projectButton(name,index){
+ const button=document.createElement('button');
+ button.className='item-button';
+ const number=document.createElement('span');
+ number.className='item-num';
+ number.textContent=String(index+1).padStart(2,'0');
+ const title=document.createElement('span');
+ title.className='item-main';
+ title.textContent=name;
+ const status=document.createElement('span');
+ status.className='item-desc';
+ status.textContent='CASE STUDY / COMING SOON';
+ title.append(status);
+ const arrow=document.createElement('span');
+ arrow.setAttribute('aria-hidden','true');
+ arrow.textContent='↗';
+ button.append(number,title,arrow);
+ button.onclick=()=>{
+  detailOrigin=button;
+  $('#detailTitle').textContent=name;
+  detail.hidden=false;
+  detailClose.focus();
+ };
+ return button;
+}
+function renderPortfolio(id){
+ const catalog=id==='all';
+ const selected=topics[id];
+ $('#worksPanel h2').textContent=id==='mind'?'SELECTED EXPERIMENTS / 03':'SELECTED WORK / INDEX';
+ app.style.setProperty('--accent',catalog?'#dcb46b':selected.color);
+ $('#topicLabel').textContent=catalog?'BEYOND FORM.':String(Object.keys(topics).indexOf(id)+1).padStart(2,'0')+' / '+selected.title;
+ topicName.textContent=catalog?'ALL WORKS.':selected.name;
+ $('#topicKicker').textContent=catalog?'PORTFOLIO INDEX':selected.tag;
+ $('#topicDescription').textContent=catalog?'Browse the project index across five disciplines.':selected.description;
+ projectList.replaceChildren();
+ for(const entry of catalog?Object.values(topics):[selected]){
+  if(catalog){
+   const heading=document.createElement('h3');
+   heading.textContent=entry.name;
+   projectList.append(heading);
+  }
+  projectList.append(...entry.projects.map(projectButton));
+ }
+ projectList.scrollTop=0;
+}
+function transition(id,time){
+ cameraFrom.copy(camera.position);
+ lookFrom.copy(aim);
+ pose(id,cameraTo,lookTo);
+ startedAt=performance.now();
+ duration=reduced.matches?1:time;
+ transitionTime=0;
+}
+const mindMedia=createMindVideo({
+ layer:mediaLayer,plane:mediaLayer.firstElementChild,video:mediaLayer.querySelector('video'),still:mediaLayer.querySelector('img'),
+ source:'./assets/mind.mp4',endFrame:'./assets/mind-end.png',fallback:'./assets/mind-hero.png',
+ // Local scan points paired with the same landmarks in the source video's first usable frame.
+ getLandmarks(){
+  camera.updateMatrixWorld();
+  bust.updateWorldMatrix(true,false);
+  return [
+   [[.0374,1.4959,.1826],[886,325]],
+   [[-.0225,1.3404,.1258],[854,402]],
+   [[.3118,1.0908,.4752],[1014,491]],
+   [[.9315,.3431,.1752],[1292,852]],
+   [[-.9983,.0444,-.0115],[407,966]]
+  ].map(([point,source])=>{
+   const p=bust.localToWorld(new THREE.Vector3(...point)).project(camera);
+   return {source,screen:[(p.x+1)*stage.clientWidth/2,(1-p.y)*stage.clientHeight/2]};
+  });
+ },
+ onCover(videoFrame){
+  app.classList.add('is-mind-revelation','is-awakening');
+  if(videoFrame){
+   // The cropped recording does not show the bottom of the plinth.
+   // Keep only the live pedestal behind the feathered video edge until it zooms out of view.
+   bust.visible=false;
+   renderer.render(scene,camera);
+  }
+ },
+ onInteractive(){
+  state='focus';
+  app.classList.add('is-focus');
+  topic.inert=false;
+  stage.setAttribute('aria-label','MIND 雕塑场景，点击或按 Esc 返回首页');
+  stage.style.cursor='pointer';
+  back.focus({preventScroll:true});
+ }
+});
+const formMedia=createMindVideo({
+ layer:formMediaLayer,plane:formMediaLayer.firstElementChild,
+ video:formMediaLayer.querySelector('video'),still:formMediaLayer.querySelector('img'),
+ source:'./assets/form.mp4',endFrame:'./assets/form.png',fallback:'./assets/form.png',startTime:0,
+ getLandmarks(){
+  camera.updateMatrixWorld();
+  bust.updateWorldMatrix(true,false);
+  return [
+   [[.0374,1.4959,.1826],[866,224]],
+   [[-.0225,1.3404,.1258],[827,320]],
+   [[.3118,1.0908,.4752],[1026,428]],
+   [[.9315,.3431,.1752],[1317,853]],
+   [[-.9983,.0444,-.0115],[356,930]]
+  ].map(([point,source])=>{
+   const p=bust.localToWorld(new THREE.Vector3(...point)).project(camera);
+   return {source,screen:[(p.x+1)*stage.clientWidth/2,(1-p.y)*stage.clientHeight/2]};
+  });
+ },
+ onCover(videoFrame){
+  app.classList.add('is-mind-revelation','is-awakening');
+  if(videoFrame){
+   bust.visible=false;
+   renderer.render(scene,camera);
+  }
+ },
+ onInteractive(){
+  state='focus';
+  app.classList.add('is-focus');
+  topic.inert=false;
+  stage.setAttribute('aria-label','FORM 雕塑场景，点击或按 Esc 返回首页');
+  stage.style.cursor='pointer';
+  back.focus({preventScroll:true});
+ }
+});
+const signalMedia=createMindVideo({
+ layer:signalMediaLayer,plane:signalMediaLayer.firstElementChild,
+ video:signalMediaLayer.querySelector('video'),still:signalMediaLayer.querySelector('img'),
+ source:'./assets/Signal.mp4',endFrame:'./assets/signal.png',fallback:'./assets/signal.png',startTime:0,
+ getLandmarks(){
+  camera.updateMatrixWorld();
+  bust.updateWorldMatrix(true,false);
+  return [
+   [[.0374,1.4959,.1826],[588,215]],
+   [[-.0225,1.3404,.1258],[572,250]],
+   [[.3118,1.0908,.4752],[684,325]],
+   [[.9315,.3431,.1752],[847,514]],
+   [[-.9983,.0444,-.0115],[280,624]]
+  ].map(([point,source])=>{
+   const p=bust.localToWorld(new THREE.Vector3(...point)).project(camera);
+   return {source,screen:[(p.x+1)*stage.clientWidth/2,(1-p.y)*stage.clientHeight/2]};
+  });
+ },
+ onCover(videoFrame){
+  app.classList.add('is-mind-revelation','is-awakening');
+  if(videoFrame){
+   bust.visible=false;
+   renderer.render(scene,camera);
+  }
+ },
+ onInteractive(){
+  state='focus';
+  app.classList.add('is-focus');
+  topic.inert=false;
+  stage.setAttribute('aria-label','SIGNAL 雕塑场景，点击或按 Esc 返回首页');
+  stage.style.cursor='pointer';
+  back.focus({preventScroll:true});
+ }
+});
+const coreMedia=createMindVideo({
+ layer:coreMediaLayer,plane:coreMediaLayer.firstElementChild,
+ video:coreMediaLayer.querySelector('video'),still:coreMediaLayer.querySelector('img'),
+ source:'./assets/Core.mp4',endFrame:'./assets/core.png',fallback:'./assets/core.png',startTime:0,
+ getLandmarks(){
+  camera.updateMatrixWorld();
+  bust.updateWorldMatrix(true,false);
+  return [
+   [[.0374,1.4959,.1826],[625,204]],
+   [[-.0225,1.3404,.1258],[606,257]],
+   [[.3118,1.0908,.4752],[719,329]],
+   [[.9315,.3431,.1752],[895,546]],
+   [[-.9983,.0444,-.0115],[310,628]]
+  ].map(([point,source])=>{
+   const p=bust.localToWorld(new THREE.Vector3(...point)).project(camera);
+   return {source,screen:[(p.x+1)*stage.clientWidth/2,(1-p.y)*stage.clientHeight/2]};
+  });
+ },
+ onCover(videoFrame){
+  app.classList.add('is-mind-revelation','is-awakening');
+  if(videoFrame){
+   bust.visible=false;
+   renderer.render(scene,camera);
+  }
+ },
+ onInteractive(){
+  state='focus';
+  app.classList.add('is-focus');
+  topic.inert=false;
+  stage.setAttribute('aria-label','CORE 雕塑场景，点击或按 Esc 返回首页');
+  stage.style.cursor='pointer';
+  back.focus({preventScroll:true});
+ }
+});
+const impactMedia=createMindVideo({
+ layer:impactMediaLayer,plane:impactMediaLayer.firstElementChild,
+ video:impactMediaLayer.querySelector('video'),still:impactMediaLayer.querySelector('img'),
+ source:'./assets/Impact.mp4',endFrame:'./assets/impact.png',fallback:'./assets/impact.png',startTime:0,
+ getLandmarks(){
+  // Register the PNG to the actual video's hand landmarks without changing its aspect.
+  // A tall viewport falls back to the player's shared cover crop to avoid exposed borders.
+  const image=impactMediaLayer.querySelector('img');
+  if(stage.clientWidth/stage.clientHeight>=1.60){
+   const scale=.76859375;
+   image.style.width=(1586*scale/1180*100)+'%';
+   image.style.height=(992*scale/784*100)+'%';
+   image.style.left=(.625/1180*100)+'%';
+   image.style.top=(-.15625/784*100)+'%';
+  }else{
+   image.style.width=image.style.height='100%';
+   image.style.left=image.style.top='0';
+  }
+  camera.updateMatrixWorld();
+  bust.updateWorldMatrix(true,false);
+  return [
+   [[.0374,1.4959,.1826],[591,195]],
+   [[-.0225,1.3404,.1258],[576,253]],
+   [[.3118,1.0908,.4752],[701,330]],
+   [[.9315,.3431,.1752],[868,537]],
+   [[-.9983,.0444,-.0115],[267,644]]
+  ].map(([point,source])=>{
+   const p=bust.localToWorld(new THREE.Vector3(...point)).project(camera);
+   return {source,screen:[(p.x+1)*stage.clientWidth/2,(1-p.y)*stage.clientHeight/2]};
+  });
+ },
+ onCover(videoFrame){
+  app.classList.add('is-mind-revelation','is-awakening');
+  if(videoFrame){
+   bust.visible=false;
+   renderer.render(scene,camera);
+  }
+ },
+ onInteractive(){
+  state='focus';
+  app.classList.add('is-focus');
+  topic.inert=false;
+  stage.setAttribute('aria-label','IMPACT 雕塑场景，点击或按 Esc 返回首页');
+  stage.style.cursor='pointer';
+  back.focus({preventScroll:true});
+ }
+});
+function enter(id,origin){
+ if(state!=='home')return;
+ focusOrigin=origin;
+ active=id;
+ state=id==='mind'||id==='form'||id==='signal'||id==='core'||id==='impact'?'mind-media':'awakening';
+ hovered=pendingHover=null;
+ stage.style.cursor='';
+ renderPortfolio(id);
+ if(id==='mind'||id==='form'||id==='signal'||id==='core'||id==='impact'){
+  (id==='impact'?impactMedia:id==='core'?coreMedia:id==='signal'?signalMedia:id==='form'?formMedia:mindMedia).play(reduced.matches);
+  return;
+ }
+ transition(id,id==='all'?320:1000);
+ app.classList.add('is-awakening');
+}
+function finishHome(){
+ state='home';
+ app.classList.remove('is-mind-revelation');
+ stage.setAttribute('aria-label',stageLabel);
+ active=null;
+ hovered=pendingHover=null;
+ for(const id in levels)levels[id]=awaken[id]=0;
+ projectHotspots(stage.clientWidth,stage.clientHeight);
+ focusOrigin?.focus({preventScroll:true});
+}
+function returnHome(){
+ if(state!=='focus'&&state!=='awakening'&&state!=='mind-media')return;
+ topic.inert=true;
+ app.classList.remove('is-focus','is-awakening','is-catalog');
+ hovered=pendingHover=null;
+ if(active==='mind'||active==='form'||active==='signal'||active==='core'||active==='impact'){
+  const currentMedia=active==='impact'?impactMedia:active==='core'?coreMedia:active==='signal'?signalMedia:active==='form'?formMedia:mindMedia;
+  stage.style.cursor='';
+  bust.visible=true;
+  finishHome();
+  updateEffects?.(levels,awaken,0);
+  renderer.render(scene,camera);
+  currentMedia.reset();
+  return;
+ }
+ state='returning';
+ transition(null,730);
+}
+function closeDetail(){
+ detail.hidden=true;
+ detailOrigin?.focus();
+}
+allWorks.onclick=()=>enter('all',allWorks);
+$('.skip-link').onclick=event=>{event.preventDefault();enter('all',allWorks)};
+back.onclick=returnHome;
+detailClose.onclick=closeDetail;
+detail.onclick=event=>{if(event.target===detail)closeDetail()};
+document.addEventListener('keydown',event=>{
+ if(event.key!=='Escape')return;
+ if(!detail.hidden)closeDetail();
+ else returnHome();
+});
+
+function frame(now){
+ requestAnimationFrame(frame);
+ const dt=Math.min(.05,Math.max(0,(now-animation)/1000));
+ animation=now;
+ if(active==='mind'||active==='form'||active==='signal'||active==='core'||active==='impact'){
+  const currentMedia=active==='impact'?impactMedia:active==='core'?coreMedia:active==='signal'?signalMedia:active==='form'?formMedia:mindMedia;
+  currentMedia.update();
+  if(!currentMedia.covering)renderer.render(scene,camera);
+  return;
+ }
+ if(state==='home'&&now>=hoverAfter&&hovered!==pendingHover){
+  hovered=pendingHover;
+  stage.style.cursor=hovered?'pointer':'';
+ }
+ if(state==='awakening'||state==='returning'){
+  transitionTime=Math.min(1,(now-startedAt)/duration);
+  const eased=THREE.MathUtils.smootherstep(transitionTime,0,1);
+  camera.position.lerpVectors(cameraFrom,cameraTo,eased);
+  aim.lerpVectors(lookFrom,lookTo,eased);
+  camera.lookAt(aim);
+  if(state==='awakening'&&transitionTime>=.78&&!app.classList.contains('is-focus')){
+   app.classList.add('is-focus');
+   app.classList.toggle('is-catalog',active==='all');
+  }
+  if(transitionTime===1){
+   if(state==='awakening'){
+    state='focus';
+    topic.inert=false;
+    back.focus({preventScroll:true});
+   }else finishHome();
+  }
+ }
+ for(const id in topics){
+  const target=id==='mind'?0:state==='focus'&&active===id?1:state==='awakening'&&active===id?transitionTime:0;
+  if(state==='home'&&!active&&transitionTime===1)awaken[id]=0;
+  else awaken[id]+=(target-awaken[id])*(reduced.matches?1:1-Math.exp(-dt*7));
+  const visibility=Math.max(awaken[id],state==='home'&&hovered===id?(id==='form'?.65:.56):0);
+  if(id==='mind'&&!reduced.matches){
+   const step=dt*.56/.42;
+   levels[id]+=THREE.MathUtils.clamp(visibility-levels[id],-step,step);
+  }else{
+  levels[id]+=(visibility-levels[id])*(reduced.matches?1:1-Math.exp(-dt*(visibility>levels[id]?6:9)));
+  }
+ }
+ updateEffects?.(levels,awaken,reduced.matches?0:now/1000,dt,reduced.matches);
+ paintHotspots();
+ renderer.render(scene,camera);
+}
+requestAnimationFrame(frame);
+
+async function load(){
+ loading.hidden=false;
+ $('#loadActions').hidden=true;
+ try{
+  const {scene:model}=await new GLTFLoader().loadAsync('./assets/models/david-v2.glb',event=>{
+   if(event.total)$('#progressBar').style.width=Math.min(95,event.loaded/event.total*100)+'%';
+  });
+  const scan=model.getObjectByName('David_Bust');
+  const pedestal=model.getObjectByName('David_Base');
+  if(!scan?.isMesh||!pedestal?.isMesh||!scan.geometry.index)throw new Error('Missing indexed scan or base');
+  updateEffects=createEffects(scan);
+  bust=scan;
+  base=pedestal;
+  model.position.y=-.86;
+  rig.add(model);
+  $('#progressBar').style.width='100%';
+  loading.hidden=true;
+  hint.hidden=true;
+  if(!reduced.matches){mindMedia.preload();formMedia.preload();signalMedia.preload();coreMedia.preload();impactMedia.preload();}
+ }catch(error){
+  console.error(error);
+  $('#loadTitle').textContent='Model not available.';
+  $('#loadText').textContent='无法加载《大卫》胸像。';
+  $('#loadActions').hidden=false;
+  hint.textContent='MODEL UNAVAILABLE';
+ }
+}
+$('#retry').onclick=load;
+load();
+
 </script></body></html>
