@@ -6,3 +6,7 @@ node_modules/
 .env.*
 *.log
 .vscode/
+
+# Internal source documents must stay local
+*.pdf
+assets/kenya/p03-2.jpg

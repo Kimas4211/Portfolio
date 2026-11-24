@@ -24,6 +24,8 @@
 .app.is-mind-revelation>.bottom,
 .app.is-mind-revelation>.grain{visibility:hidden}
 .works{max-height:72vh}
+.works.is-form .item-button{padding:16px 0}
+.works.is-form .item-desc{font-size:11px;letter-spacing:.04em;margin-top:6px}
 #projectList{max-height:calc(70vh - 68px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding-right:6px}
 #projectList .item-button{grid-template-columns:18px minmax(0,1fr) 12px;gap:9px}
 #projectList .item-main{font-size:clamp(14px,1.65vw,17px);overflow-wrap:break-word}
@@ -44,7 +46,7 @@
 .hotspot-legend span::before{content:'';width:9px;height:9px;background:var(--zone-color)}
 @media(max-width:700px){.hotspot-legend{top:70px}}
 </style>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script></head><body>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script><link rel="stylesheet" href="./exhibition-page.css"><link rel="stylesheet" href="./project-detail.css"></head><body>
 <a class="skip-link" href="#worksPanel">Skip sculpture → works</a>
 <div class="app" id="app"><div class="stage" id="stage" tabindex="-1" aria-label="可交互的大卫雕塑三维场景"></div><div class="grain" aria-hidden="true"></div>
 <header class="nav"><a class="brand" href="./">KIMAS.</a><span class="nav-center">INTERACTIVE PORTFOLIO / 2026</span><div class="nav-right"><button class="outline" type="button" id="allWorks">ALL WORKS ↗</button></div></header>
@@ -57,6 +59,7 @@
 </div>
 <script type="module">
 import * as THREE from 'three';
+import {createExhibitionPage} from './exhibition-page.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {createMindVideo} from './mind-video.js';
 import {createFormHover} from './form-hover.js';
@@ -78,7 +81,7 @@ const topics={
  mind:{name:'MIND.',title:'AI & CREATIVE EXPLORATION',tag:'BEYOND THE EXPECTED',description:'Exploring how AI and emerging technologies expand creative possibilities, from visual experimentation to interactive experiences.',color:'#d9ae66',projects:['AI LIGHTING STUDY','GENERATIVE VISUAL STUDIES','INTERACTIVE AI EXPERIENCES']},
  signal:{name:'SIGNAL.',title:'DIGITAL EXPERIENCES',tag:'THOUGHT INTO CONNECTION.',description:'Web experiences, interfaces and digital products.',color:'#4b9cf4',projects:['WEB EXPERIENCE DESIGN','DIGITAL PRODUCT EXPLORATION','INTERACTION PROTOTYPES']},
  core:{name:'CORE.',title:'BRAND & VISUAL IDENTITY',tag:'IDEAS WITH A PULSE.',description:'Brand systems, visual storytelling and meaningful design expression.',color:'#d34652',projects:['VISUAL IDENTITY','BRAND CAMPAIGNS','EDITORIAL DESIGN']},
- form:{name:'FORM.',title:'SPATIAL & EXHIBITION',tag:'IDEAS TAKE SHAPE.',description:'Exhibition environments, spatial design and landscape concepts.',color:'#5aa987',projects:['EXHIBITION ENVIRONMENTS','EXPERIENTIAL SPACES','LANDSCAPE EXPLORATIONS']},
+ form:{name:'FORM.',title:'SPATIAL DESIGN & EXPERIENCE',tag:'BEYOND FORM, INTO EXPERIENCE.',description:'Bringing ideas beyond the screen and into physical space, where visual design, spatial structure, and storytelling shape experiences worth exploring and remembering.',color:'#5aa987',projects:['EXHIBITION DESIGN','SPATIAL EXPERIENCE','LANDSCAPE EXPLORATION'],projectDescriptions:['展览与展陈设计','空间与体验设计','景观与场景探索']},
  impact:{name:'IMPACT.',title:'STRATEGY & PRACTICE',tag:'STRUCTURE BEHIND POSSIBILITY.',description:'Cross-disciplinary problem solving, research and strategic thinking.',color:'#d8dee4',projects:['CROSS-DISCIPLINARY PRACTICE','RESEARCH & SYSTEMS','PROJECT DELIVERY']}
 };
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;stage.append(renderer.domElement,mediaLayer,formMediaLayer,signalMediaLayer,coreMediaLayer,impactMediaLayer);
@@ -429,7 +432,8 @@ stage.addEventListener('click',event=>{
  if(id&&id===origin.id)enter(id,stage);
 });
 
-function projectButton(name,index){
+const exhibitionPage=createExhibitionPage({background:app});
+function projectButton(name,index,description,isExhibition=false){
  const button=document.createElement('button');
  button.className='item-button';
  const number=document.createElement('span');
@@ -440,13 +444,14 @@ function projectButton(name,index){
  title.textContent=name;
  const status=document.createElement('span');
  status.className='item-desc';
- status.textContent='CASE STUDY / COMING SOON';
+ status.textContent=description??'CASE STUDY / COMING SOON';
  title.append(status);
  const arrow=document.createElement('span');
  arrow.setAttribute('aria-hidden','true');
  arrow.textContent='↗';
  button.append(number,title,arrow);
  button.onclick=()=>{
+  if(isExhibition){exhibitionPage.open(button);return;}
   detailOrigin=button;
   $('#detailTitle').textContent=name;
   detail.hidden=false;
@@ -457,6 +462,7 @@ function projectButton(name,index){
 function renderPortfolio(id){
  const catalog=id==='all';
  const selected=topics[id];
+ $('#worksPanel').classList.toggle('is-form',id==='form');
  $('#worksPanel h2').textContent=id==='mind'?'SELECTED EXPERIMENTS / 03':'SELECTED WORK / INDEX';
  app.style.setProperty('--accent',catalog?'#dcb46b':selected.color);
  $('#topicLabel').textContent=catalog?'BEYOND FORM.':String(Object.keys(topics).indexOf(id)+1).padStart(2,'0')+' / '+selected.title;
@@ -470,7 +476,7 @@ function renderPortfolio(id){
    heading.textContent=entry.name;
    projectList.append(heading);
   }
-  projectList.append(...entry.projects.map(projectButton));
+  projectList.append(...entry.projects.map((name,index)=>projectButton(name,index,entry.projectDescriptions?.[index],entry===topics.form&&index===0)));
  }
  projectList.scrollTop=0;
 }
@@ -720,7 +726,7 @@ back.onclick=returnHome;
 detailClose.onclick=closeDetail;
 detail.onclick=event=>{if(event.target===detail)closeDetail()};
 document.addEventListener('keydown',event=>{
- if(event.key!=='Escape')return;
+ if(event.key!=='Escape'||document.querySelector('.exhibition-page[open]'))return;
  if(!detail.hidden)closeDetail();
  else returnHome();
 });
